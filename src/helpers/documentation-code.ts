@@ -1,15 +1,8 @@
 export const nodejs = `const axios = require("axios");
 
 const options = {
-    method: 'POST',
-    url: 'https://similarityapi.com/api/v1/similarity',
-    params: {
-      text1: 'First text',
-      text2: 'Second text'
-    },
-    headers: {
-      'Authorization': 'YOUR_API_KEY',
-    }
+    method: 'GET',
+    url: 'https://nice-fish-wear.cyclic.app/api/summary?apiKey={YOUR_API_KEY}&query={STOCK_SYMBOL}'
   };
   
 axios.request(options).then(function (response) {
@@ -20,21 +13,9 @@ axios.request(options).then(function (response) {
 
 export const python = `import requests
 
-url = 'https://similarityapi.com/api/v1/similarity'
-api_key = 'YOUR_API_KEY'
-text1 = 'First text'
-text2 = 'Second text'
+url = 'https://nice-fish-wear.cyclic.app/api/summary?apiKey={YOUR_API_KEY}&query={STOCK_SYMBOL}'
 
-headers = {
-    'Authorization': api_key
-}
-
-payload = {
-    'text1': text1,
-    'text2': text2
-}
-
-response = requests.post(url, headers=headers, json=payload)
+response = requests.get(url)
 
 if response.status_code == 200:
     data = response.json()
