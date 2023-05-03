@@ -18,16 +18,16 @@ export default withAuth(
   async function middleware(req) {
     const pathname = req.nextUrl.pathname;
     // Manage rate limiting
-    if (pathname.startsWith("/api")) {
-      const ip = req.ip ?? "127.0.0.1";
-      try {
-        const { success } = await ratelimit.limit(ip);
-        if (!success) return NextResponse.json({ error: "Too many requests" });
-        return NextResponse.next();
-      } catch (err) {
-        return NextResponse.json({ error: "Internal Server Error" });
-      }
-    }
+    // if (pathname.startsWith("/api")) {
+    //   const ip = req.ip ?? "127.0.0.1";
+    //   try {
+    //     const { success } = await ratelimit.limit(ip);
+    //     if (!success) return NextResponse.json({ error: "Too many requests" });
+    //     return NextResponse.next();
+    //   } catch (err) {
+    //     return NextResponse.json({ error: "Internal Server Error" });
+    //   }
+    // }
     // Manage route protetcion
     const token = await getToken({ req });
     const isAuth = !!token;
