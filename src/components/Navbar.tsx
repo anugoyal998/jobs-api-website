@@ -6,6 +6,7 @@ import SignInButton from "@/components/SignInButton";
 import SignOutButton from "@/components/SignOutButton";
 import ThemeToggle from "@/components/ThemeToggle";
 import { authOptions } from "@/lib/auth";
+import Menu from "@/components/Menu";
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
@@ -17,7 +18,7 @@ const Navbar = async () => {
         </Link>
         <div className="md:hidden">
           {" "}
-          <ThemeToggle />
+          <Menu isSession={session ? true : false} />
         </div>
         <div className="hidden md:flex gap-4">
           <ThemeToggle />
