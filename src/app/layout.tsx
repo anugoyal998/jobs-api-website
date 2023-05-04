@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
-import { Toaster } from "@/components/ui/Toast";
+import { HotToaster } from "@/ui/Toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +21,7 @@ export default function RootLayout({
         <Providers>
           {/* @ts-expect-error Server Component */}
           <Navbar />
-          {/* <Toaster position="bottom-right" /> */}
+          <HotToaster position="bottom-right" />
           <main>{children}</main>
         </Providers>
         {/* Allow for more height on mobile devices */}

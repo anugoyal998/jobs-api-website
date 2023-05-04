@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
 import { Icons } from '@/components/Icons'
 import { cn } from '@/lib/utils'
 import * as React from 'react'
-import hotToast, { Toaster as HotToaster } from 'react-hot-toast'
+import hotToast, { Toaster } from 'react-hot-toast'
 
-export const Toaster = HotToaster
+export const HotToaster = Toaster
 
 interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
   visible: boolean
