@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "React Finance API | Home",
-  description: "Free & open source finance API",
+  description: "Free & open source Finance API",
 };
 
 export default function Home() {
