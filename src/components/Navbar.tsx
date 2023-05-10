@@ -1,12 +1,13 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { FC } from "react";
-import { buttonVariants } from "@/components/ui/Button";
+import Button, { buttonVariants } from "@/components/ui/Button";
 import SignInButton from "@/components/SignInButton";
 import SignOutButton from "@/components/SignOutButton";
 import ThemeToggle from "@/components/ThemeToggle";
 import { authOptions } from "@/lib/auth";
 import Menu from "@/components/Menu";
+import { Github } from "lucide-react";
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
@@ -23,6 +24,12 @@ const Navbar = async () => {
         <div className="hidden md:flex gap-4">
           <ThemeToggle />
           <Link
+            href="https://github.com/anugoyal998/react-finance-api"
+            className={buttonVariants({ variant: "ghost" })}
+          >
+            <Github />
+          </Link>
+          <Link
             href="/documentation"
             className={buttonVariants({ variant: "ghost" })}
           >
@@ -30,7 +37,12 @@ const Navbar = async () => {
           </Link>
           {session ? (
             <>
-              <Link href="/dashboard" className={buttonVariants({ variant: "ghost" })}>Dashboard</Link>
+              <Link
+                href="/dashboard"
+                className={buttonVariants({ variant: "ghost" })}
+              >
+                Dashboard
+              </Link>
               <SignOutButton />
             </>
           ) : (

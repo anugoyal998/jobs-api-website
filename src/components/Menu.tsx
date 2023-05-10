@@ -21,6 +21,7 @@ import {
   Laptop,
   File,
   LayoutDashboard,
+  Github
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import SignInButton from "@/components/SignInButton";
@@ -44,6 +45,10 @@ const Menu: FC<MenuProps> = ({ isSession }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" forceMount>
+        <DropdownMenuItem onClick={() => router.push("https://github.com/anugoyal998/react-finance-api")}>
+          <Github className="mr-2 h-4 w-4" />
+          <span>Github</span>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => router.push("/documentation")}>
           <File className="mr-2 h-4 w-4" />
           <span>Documentation</span>
