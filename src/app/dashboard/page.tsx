@@ -1,7 +1,6 @@
 import { FC } from "react";
 import type { Metadata } from "next";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/auth";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import RequestApiKey from "@/components/RequestApiKey";
@@ -12,19 +11,15 @@ export const metadata: Metadata = {
   description: "Free & open source finance API",
 };
 const page = async () => {
-  const user = await getServerSession(authOptions);
-  if (!user) return notFound();
+  const session = await auth();
+  if (!session?.user) return notFound();
+  const { user } = session;
   const apiKey = await db.apiKey.findFirst({
-    where: { userId: user?.user.id, enabled: true },
+    where: { userId: user.id, enabled: true },
   });
   return (
     <div className="max-w-7xl mx-auto mt-16">
-      {apiKey ? (
-        /* @ts-expect-error Server Component */
-        <ApiDashboard />
-      ) : (
-        <RequestApiKey />
-      )}
+      {apiKey ? <ApiDashboard /> : <RequestApiKey />}
     </div>
   );
 };

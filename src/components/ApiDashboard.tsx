@@ -1,6 +1,5 @@
-import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import { notFound } from "next/navigation";
 import { FC } from "react";
 import { formatDistance } from "date-fns";
@@ -11,11 +10,13 @@ import Table from "@/ui/Table";
 import ApiKeyOptions from "./ApiKeyOptions";
 
 const ApiDashboard = async () => {
-  const user = await getServerSession(authOptions);
-  if (!user) return notFound();
+  const session = await auth();
+  if (!session?.user) return notFound();
+
+  const { user } = session;
 
   const apiKeys = await db.apiKey.findMany({
-    where: { userId: user.user.id },
+    where: { userId: user.id },
   });
 
   const activeApiKey = apiKeys.find((apiKey) => apiKey.enabled);
@@ -37,7 +38,7 @@ const ApiDashboard = async () => {
 
   return (
     <div className="container flex flex-col gap-6">
-      <LargeHeading>Welcome back, {user.user.name}</LargeHeading>
+      <LargeHeading>Welcome back, {user.name}</LargeHeading>
       <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start items-center">
         <Paragraph>Your API Key:</Paragraph>
         <Input className="w-fit truncate" readOnly value={activeApiKey.key} />

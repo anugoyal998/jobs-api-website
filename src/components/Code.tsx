@@ -1,10 +1,10 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import Highlight, { defaultProps, type Language } from "prism-react-renderer";
+import { Highlight, themes, type Language } from "prism-react-renderer";
 import { useTheme } from "next-themes";
-import darkTheme from "prism-react-renderer/themes/nightOwl";
-import lightTheme from "prism-react-renderer/themes/nightOwlLight";
+// import darkTheme from "prism-react-renderer/themes/nightOwl";
+// import lightTheme from "prism-react-renderer/themes/nightOwlLight";
 
 interface CodeProps {
   code: string;
@@ -43,10 +43,10 @@ const Code: FC<CodeProps> = ({
   // number of lines
   const lines = text.split(/\r\n|\r|\n/);
 
-  const theme = applicationTheme === "light" ? lightTheme : darkTheme;
+  const theme = applicationTheme === "light" ? themes.nightOwlLight : themes.nightOwl
 
   return (
-    <Highlight {...defaultProps} code={text} language={language} theme={theme}>
+    <Highlight code={text} language={language} theme={theme}>
       {({ className, tokens, getLineProps, getTokenProps }) => (
         <pre
           className={
