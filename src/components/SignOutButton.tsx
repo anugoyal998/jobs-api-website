@@ -6,6 +6,7 @@ import { signOut } from "next-auth/react";
 import { toast } from "@/components/ui/Toast";
 import { LogOut, Loader2 } from "lucide-react";
 import { DropdownMenuItem } from "@/ui/DropdownMenu";
+import { useRouter } from "next/navigation";
 
 interface SignOutButtonProps {
   isDropdownMenuItem?: boolean;
@@ -13,11 +14,13 @@ interface SignOutButtonProps {
 
 const SignOutButton: FC<SignOutButtonProps> = ({ isDropdownMenuItem }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const signUserOut = async () => {
     setIsLoading(true);
     try {
       await signOut();
+      router.push("/login")
     } catch (err) {
       toast({
         title: "Error signing out",
